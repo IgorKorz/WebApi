@@ -9,31 +9,31 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [Route("api/days")]
-    public class DaysController : Controller
+    public class MeetingRoomsController : Controller
     {
-        DaysContext db;
+        MeetingRoomsContext db;
 
-        public DaysController(DaysContext context)
+        public MeetingRoomsController(MeetingRoomsContext context)
         {
             db = context;
 
-            if (db.Days.Count() == 0)
+            if (db.MeetingRooms.Count() == 0)
             {
-                db.Days.Add(new Day { DayOfWeek = 1, DayOfMonth = 1});
+                db.MeetingRooms.Add(new MeetingRoom { IsBusy = false });
                 db.SaveChanges();
             }
         }
 
         [HttpGet]
-        public IEnumerable<Day> Get()
+        public IEnumerable<MeetingRoom> Get()
         {
-            return db.Days.ToList();
+            return db.MeetingRooms.ToList();
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Day day = db.Days.FirstOrDefault(x => x.Id == id);
+            MeetingRoom day = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
 
             if (day == null) NotFound();
 
@@ -41,22 +41,22 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Day day)
+        public IActionResult Post([FromBody]MeetingRoom day)
         {
             if (day == null) BadRequest();
 
-            db.Days.Add(day);
+            db.MeetingRooms.Add(day);
             db.SaveChanges();
 
             return Ok(day);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody]Day day)
+        public IActionResult Put([FromBody]MeetingRoom day)
         {
             if (day == null) BadRequest();
 
-            if (!db.Days.Any(x => x.Id == day.Id)) return NotFound();
+            if (!db.MeetingRooms.Any(x => x.Id == day.Id)) return NotFound();
 
             db.Update(day);
             db.SaveChanges();
@@ -67,11 +67,11 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Day day = db.Days.FirstOrDefault(x => x.Id == id);
+            MeetingRoom day = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
 
             if (day == null) NotFound();
 
-            db.Days.Remove(day);
+            db.MeetingRooms.Remove(day);
             db.SaveChanges();
 
             return Ok(day);
