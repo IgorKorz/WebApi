@@ -10,8 +10,8 @@ using WebApi.Models;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(MeetingRoomsContext))]
-    [Migration("20180704100326_initial")]
-    partial class initial
+    [Migration("20180704110500_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace WebApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateBusy");
+
+                    b.Property<DateTime>("DateFree");
 
                     b.Property<bool>("IsBusy");
 

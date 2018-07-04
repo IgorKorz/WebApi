@@ -27,6 +27,8 @@ namespace WebApi.Migrations
 
                     b.Property<DateTime>("DateBusy");
 
+                    b.Property<DateTime>("DateFree");
+
                     b.Property<bool>("IsBusy");
 
                     b.HasKey("Id");

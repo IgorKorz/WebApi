@@ -8,7 +8,7 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    [Route("api/days")]
+    [Route("api/mrs")]
     public class MeetingRoomsController : Controller
     {
         MeetingRoomsContext db;
@@ -33,48 +33,48 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            MeetingRoom day = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
+            MeetingRoom meetingRoom = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
 
-            if (day == null) NotFound();
+            if (meetingRoom == null) return NotFound();
 
-            return new ObjectResult(day);
+            return new ObjectResult(meetingRoom);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]MeetingRoom day)
+        public IActionResult Post([FromBody]MeetingRoom meetingRoom)
         {
-            if (day == null) BadRequest();
+            if (meetingRoom == null) return BadRequest();
 
-            db.MeetingRooms.Add(day);
+            db.MeetingRooms.Add(meetingRoom);
             db.SaveChanges();
 
-            return Ok(day);
+            return Ok(meetingRoom);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody]MeetingRoom day)
+        public IActionResult Put([FromBody]MeetingRoom meetingRoom)
         {
-            if (day == null) BadRequest();
+            if (meetingRoom == null) return BadRequest();
 
-            if (!db.MeetingRooms.Any(x => x.Id == day.Id)) return NotFound();
+            if (db.MeetingRooms.Any(x => x.Id == meetingRoom.Id)) return NotFound();
 
-            db.Update(day);
+            db.Update(meetingRoom);
             db.SaveChanges();
 
-            return Ok(day);
+            return Ok(meetingRoom);
         }
         
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            MeetingRoom day = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
+            MeetingRoom meetingRoom = db.MeetingRooms.FirstOrDefault(x => x.Id == id);
 
-            if (day == null) NotFound();
+            if (meetingRoom == null) return NotFound();
 
-            db.MeetingRooms.Remove(day);
+            db.MeetingRooms.Remove(meetingRoom);
             db.SaveChanges();
 
-            return Ok(day);
+            return Ok(meetingRoom);
         }
     }
 }
