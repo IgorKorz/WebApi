@@ -19,9 +19,9 @@ namespace WebApi
         
         public void ConfigureServices(IServiceCollection services)
         {
-            string day = "Server=(localdb)\\mssqllocaldb;Database=ttsdbstore;Trusted_Connection=True;MultipleActiveResultSets=true";
+            string db = "Server=81.211.69.78;Database=students1;User Id=student;Password=student44";
 
-            services.AddDbContext<MeetingRoomsContext>(opt => opt.UseSqlServer(day));
+            services.AddDbContext<MeetingRoomsContext>(opt => opt.UseSqlServer(db));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

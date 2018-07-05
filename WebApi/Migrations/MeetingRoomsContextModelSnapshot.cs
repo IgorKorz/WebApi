@@ -19,17 +19,32 @@ namespace WebApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WebApi.Models.MeetingRoom", b =>
+            modelBuilder.Entity("WebApi.Models.DayOfBusy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateBusy");
+                    b.Property<DateTime>("Date");
 
-                    b.Property<DateTime>("DateFree");
+                    b.Property<string>("Holder");
 
-                    b.Property<bool>("IsBusy");
+                    b.Property<int>("IdRoom");
+
+                    b.Property<string>("Note");
+
+                    b.Property<int>("TimeOfBusy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DaysOfBusy");
+                });
+
+            modelBuilder.Entity("WebApi.Models.MeetingRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("Id");
 

@@ -19,7 +19,8 @@ namespace WebApi.Controllers
 
             if (db.MeetingRooms.Count() == 0)
             {
-                db.MeetingRooms.Add(new MeetingRoom { IsBusy = false });
+                db.MeetingRooms.Add(new MeetingRoom { });
+                db.MeetingRooms.Add(new MeetingRoom { });
                 db.SaveChanges();
             }
         }

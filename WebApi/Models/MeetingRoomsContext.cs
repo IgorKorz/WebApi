@@ -9,5 +9,6 @@ namespace WebApi.Models
         { }
 
         public DbSet<MeetingRoom> MeetingRooms { get; set; }
+        public DbSet<DayOfBusy> DaysOfBusy { get; set; }
     }
 }
