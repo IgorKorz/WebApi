@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         {
             if (startDay == null) startDay = new DateTime((DateTime.Now - DateTime.Now.TimeOfDay).Ticks - 14 * oneDay);
 
-            if (endDay == null) startDay = new DateTime((DateTime.Now - DateTime.Now.TimeOfDay).Ticks + 14 * oneDay);
+            //if (endDay == null) startDay = new DateTime((DateTime.Now - DateTime.Now.TimeOfDay).Ticks + 14 * oneDay);
 
             for (int i = 0; i < 5; i++)
             {
