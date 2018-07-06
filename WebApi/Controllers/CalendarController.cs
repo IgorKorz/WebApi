@@ -25,20 +25,19 @@ namespace WebApi.Controllers
             oneDay = b.Subtract(a).Ticks;
         }
 
-        [HttpGet("{currentDay}")]
-        public IActionResult GetScheduler(DateTime currentDay)
+        [HttpPost]
+        public IActionResult GetScheduler(DateTime? startDay = null, DateTime? endDay = null)
         {
-            long startDay = (currentDay.Ticks - currentDay.TimeOfDay.Ticks) - this.oneDay * 14;
+            if (startDay == null) startDay = new DateTime((DateTime.Now - DateTime.Now.TimeOfDay).Ticks - 14 * oneDay);
+
+            if (endDay == null) startDay = new DateTime((DateTime.Now - DateTime.Now.TimeOfDay).Ticks + 14 * oneDay);
 
             for (int i = 0; i < 5; i++)
             {
                 weeks.Add(new List<DateTime>());
 
                 for (int j = 0; j < 7; j++)
-                {
-                    weeks[i].Add(new DateTime(startDay));
-                    startDay += oneDay;
-                }
+                    weeks[i].Add(new DateTime(startDay.Value.Ticks + oneDay));
             }
 
             return Ok(weeks);
