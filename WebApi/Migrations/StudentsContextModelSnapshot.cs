@@ -8,8 +8,8 @@ using WebApi.Models;
 
 namespace WebApi.Migrations
 {
-    [DbContext(typeof(MeetingRoomsContext))]
-    partial class MeetingRoomsContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(StudentsContext))]
+    partial class StudentsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,9 @@ namespace WebApi.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<int>("TimeOfBusy");
+                    b.Property<TimeSpan>("TimeOfBusy");
+
+                    b.Property<TimeSpan>("TimeOfFree");
 
                     b.HasKey("Id");
 

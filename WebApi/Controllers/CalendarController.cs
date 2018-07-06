@@ -13,11 +13,11 @@ namespace WebApi.Controllers
     {
         List<List<DateTime>> weeks = new List<List<DateTime>>();
         DateTime now = DateTime.Now;
-        MeetingRoomsContext db;
+        StudentsContext db;
         long oneDay;
 
 
-        public CalendarController(MeetingRoomsContext context)
+        public CalendarController(StudentsContext context)
         {
             db = context;
             DateTime a = new DateTime(),
@@ -25,10 +25,9 @@ namespace WebApi.Controllers
             oneDay = b.Subtract(a).Ticks;
         }
 
-        [HttpGet]
+        [HttpGet("{currentDay}")]
         public IActionResult GetScheduler(DateTime currentDay)
         {
-            currentDay = DateTime.Now;
             long startDay = (currentDay.Ticks - currentDay.TimeOfDay.Ticks) - this.oneDay * 14;
 
             for (int i = 0; i < 5; i++)
@@ -56,26 +55,38 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]DayOfBusy dayOfBusy)
         {
-            if (db.DaysOfBusy.FirstOrDefault(x => x.Date == dayOfBusy.Date 
-                                               && x.IdRoom == dayOfBusy.IdRoom) != null)
+            if (db.DaysOfBusy.FirstOrDefault(x => x == dayOfBusy) != null)
                 return BadRequest();
 
             db.DaysOfBusy.Add(dayOfBusy);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(dayOfBusy);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody]DayOfBusy)
+        public IActionResult Put([FromBody]DayOfBusy dayOfBusy)
         {
-            return Ok();
+            if (db.DaysOfBusy.FirstOrDefault(x => x == dayOfBusy) == null)
+                return BadRequest();
+
+            db.DaysOfBusy.Update(dayOfBusy);
+            db.SaveChanges();
+
+            return Ok(dayOfBusy);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(DateTime date)
         {
-            return Ok();
+            DayOfBusy dayOfBusy = db.DaysOfBusy.FirstOrDefault(x => x.Date == date);
+
+            if (dayOfBusy == null) return BadRequest();
+
+            db.DaysOfBusy.Remove(dayOfBusy);
+            db.SaveChanges();
+
+            return Ok(dayOfBusy);
         }
     }
 }

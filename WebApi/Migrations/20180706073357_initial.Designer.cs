@@ -9,9 +9,9 @@ using WebApi.Models;
 
 namespace WebApi.Migrations
 {
-    [DbContext(typeof(MeetingRoomsContext))]
-    [Migration("20180705103454_Initial")]
-    partial class Initial
+    [DbContext(typeof(StudentsContext))]
+    [Migration("20180706073357_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,9 @@ namespace WebApi.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<int>("TimeOfBusy");
+                    b.Property<TimeSpan>("TimeOfBusy");
+
+                    b.Property<TimeSpan>("TimeOfFree");
 
                     b.HasKey("Id");
 

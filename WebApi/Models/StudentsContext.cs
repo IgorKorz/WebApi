@@ -2,9 +2,9 @@
 
 namespace WebApi.Models
 {
-    public class MeetingRoomsContext : DbContext
+    public class StudentsContext : DbContext
     {
-        public MeetingRoomsContext(DbContextOptions<MeetingRoomsContext> options)
+        public StudentsContext(DbContextOptions<StudentsContext> options)
             : base(options)
         { }
 

@@ -11,9 +11,9 @@ namespace WebApi.Controllers
     [Route("api/mrs")]
     public class MeetingRoomsController : Controller
     {
-        MeetingRoomsContext db;
+        StudentsContext db;
 
-        public MeetingRoomsController(MeetingRoomsContext context)
+        public MeetingRoomsController(StudentsContext context)
         {
             db = context;
 

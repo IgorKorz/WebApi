@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace WebApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
                     IdRoom = table.Column<int>(nullable: false),
-                    TimeOfBusy = table.Column<int>(nullable: false),
+                    TimeOfBusy = table.Column<TimeSpan>(nullable: false),
+                    TimeOfFree = table.Column<TimeSpan>(nullable: false),
                     Holder = table.Column<string>(nullable: true),
                     Note = table.Column<string>(nullable: true)
                 },
